@@ -7,16 +7,19 @@ Tmux configuration, that supercharges your [tmux](https://tmux.github.io/) and b
 Table of contents
 -----------------
 
-1. [Features](#features)
-1. [Installation](#installation)
-1. [General settings](#general-settings)
-1. [Key bindings](#key-bindings)
-1. [Status line](#status-line)
-1. [Nested tmux sessions](#nested-tmux-sessions)
-1. [Copy mode](#copy-mode)
-1. [Clipboard integration](#clipboard-integration)
-1. [Themes and customization](#themes-and-customization)
-1. [iTerm2 and tmux integration](#iterm2-and-tmux-integration)
+- [Tmux Configuration](#tmux-configuration)
+  - [Table of contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [General settings](#general-settings)
+  - [Key bindings](#key-bindings)
+  - [Status line](#status-line)
+  - [Nested tmux sessions](#nested-tmux-sessions)
+    - [Local and remote sessions](#local-and-remote-sessions)
+  - [Copy mode](#copy-mode)
+  - [Clipboard integration](#clipboard-integration)
+  - [Themes and customization](#themes-and-customization)
+  - [iTerm2 and tmux integration](#iterm2-and-tmux-integration)
 
 Features
 ---------
@@ -40,7 +43,6 @@ Features
 
 - CPU, memory usage, system load average metrics
 - username and hostname, current date time
-- battery information in status line
 - visual indicator when you press `prefix`
 - visual indicator when you're in `Copy` mode
 - visual indicator when pane is zoomed
@@ -61,7 +63,7 @@ On OSX you can install latest 2.6 version with `brew install tmux`. On Linux it'
 
 To install tmux-config:
 ```
-$ git clone https://github.com/samoshkin/tmux-config.git
+$ git clone git@github.com:pip182/tmux-config.git
 $ ./tmux-config/install.sh
 ```
 
@@ -99,7 +101,7 @@ Key bindings
 -----------
 So `~/.tmux.conf` overrides default key bindings for many action, to make them more reasonable, easy to recall and comforable to type.
 
-Let's go through them. 
+Let's go through them.
 
 If you are an iTerm2 user, third column describes the keybinding of similar  "action" in iTerm2. It's possible to reuse very same keys you already get used to and tell iTerm2 to execute analogous tmux actions. See [iTerm2 and tmux integration](#iterm2-and-tmux-integration) section below.
 
@@ -310,7 +312,6 @@ The right part of status line consists of following components:
 - CPU, memory usage, system load average metrics. Powered by [tmux-plugin-sysstat](https://github.com/samoshkin/tmux-plugin-sysstat) (dislaimed, that's my own development, because I haven't managed to find any good plugin with CPU and memory/swap metrics)
 - username and hostname (invaluable when you SSH onto remote host)
 - current date time
-- battery information
 - visual indicator when you press prefix key: `[^A]`.
 - visual indicator when pane is zoomed: `[Z]`
 - online/offline visual indicator (just pings `google.com`)
@@ -396,7 +397,7 @@ Second workaround is really involved and consists of [local network listener and
 - Buffer will be sent thru SSH remote tunnel from port `2222` on remote machine to port `3333` on local machine.
 - Setup a service on local machine (systemd service unit with socket activation), which listens on network socket on port `3333`, and pipes any input to `pbcopy` command (or `xsel`, `xclip`).
 
-This tmux-config does its best to integrate with system clipboard, trying all solutions above in order, and falling back to OSC 52 ANSI escape sequences in case of failure. 
+This tmux-config does its best to integrate with system clipboard, trying all solutions above in order, and falling back to OSC 52 ANSI escape sequences in case of failure.
 
 On OSX you might need to install `reattach-to-user-namespace` wrapper: `brew install reattach-to-user-namespace`, and make sure OSC 52 sequence handling is turned on in iTerm. (Preferences -> General -> Applications in Terminal may access clipboard).
 
